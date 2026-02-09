@@ -200,7 +200,7 @@
 
         <div class="form-group">
             <label for="username" class="form-label"><?= _("Username") ?></label>
-            <input type="text" class="form-control" name="user" id="username" autocomplete="username" required autofocus>
+            <input type="text" class="form-control" name="user" id="username" placeholder="Type Your Username" autocomplete="username" required autofocus>
         </div>
 
         <div class="form-group">
@@ -211,7 +211,7 @@
                 <?php } ?>
             </label>
             <div class="password-wrapper">
-                <input type="password" class="form-control" name="password" id="password" autocomplete="current-password" required>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Type Your Username" autocomplete="current-password" required>
                 <i class="fas fa-eye" id="togglePassword"></i>
             </div>
         </div>
