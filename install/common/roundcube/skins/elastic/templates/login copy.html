@@ -1,0 +1,44 @@
+<roundcube:include file="includes/layout.html" />
+<link rel="stylesheet" type="text/css" href="skins/elastic/styles/custom.css">
+
+<h1 class="voice"><roundcube:object name="productname" /> <roundcube:label name="login" /></h1>
+
+<div id="layout-content" class="selected no-navbar" role="main">
+    
+    <div class="logo-container">
+        <img src="skins/elastic/images/shadhinHostingLogo.png" id="logo" alt="Shadhin Mail">
+    </div>
+
+    <form id="custom-login-form" name="login-form" method="post" action="./">
+        <input type="hidden" name="_task" value="login">
+        <input type="hidden" name="_action" value="login">
+        <input type="hidden" name="_timezone" id="rcmlogintz" value="Asia/Dhaka">
+        <input type="hidden" name="_url" id="rcmloginurl" value="">
+        
+        <roundcube:container name="loginform" id="login-form" />
+
+        <div class="input-group">
+            <label for="rcmloginuser">Username</label>
+            <input name="_user" id="rcmloginuser" type="text" placeholder="username@domainName" required autocomplete="off">
+        </div>
+
+        <div class="input-group">
+            <label for="rcmloginpwd">Password</label>
+            <input name="_pass" id="rcmloginpwd" type="password" placeholder="Your Password" required autocomplete="off">
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="btn-login">Login to Shadhin Mail</button>
+        </div>
+
+        <div id="login-footer">
+             <p>&copy; 2026 <strong>Shadhin Maildfdfd</strong></p>
+        </div>
+    </form>
+</div>
+
+<noscript>
+    <p class="noscriptwarning"><roundcube:label name="noscriptwarning" /></p>
+</noscript>
+
+<roundcube:include file="includes/footer.html" />
