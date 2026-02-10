@@ -1,44 +1,344 @@
 <roundcube:include file="includes/layout.html" />
-<link rel="stylesheet" type="text/css" href="skins/elastic/styles/custom.css">
 
-<h1 class="voice"><roundcube:object name="productname" /> <roundcube:label name="login" /></h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<div id="layout-content" class="selected no-navbar" role="main">
-    
-    <div class="logo-container">
-        <img src="skins/elastic/images/shadhinHostingLogo.png" id="logo" alt="Shadhin Mail">
+<style>
+* {
+    box-sizing: border-box;
+    /* font-family: 'Inter', sans-serif; */
+}
+
+html, body {
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+#layout, #layout-content {
+    position: fixed !important;
+    inset: 0 !important;
+    background-color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+}
+
+.login-box {
+    background: #fff !important;
+    width: 90% !important;
+    max-width: 480px !important;
+    padding: 50px 45px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.45) !important;
+    text-align: center !important;
+}
+
+/* =========================
+   HEADER
+========================= */
+.login-header img {
+    max-width: 220px;
+    margin-bottom: 8px;
+}
+
+.login-title {
+    font-size: 35px;
+    font-weight: 800;
+    color: #444;
+    margin: 0 0 20px 0;
+}
+
+.login-subtitle{
+    font-size: 22px;
+    color: #1E7E34;
+    font-weight: 600;
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 26px;
+    text-align: left;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #334155;
+}
+
+/* input wrapper */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* input */
+/* .form-control {
+    width: 100%;
+    height: 56px;
+    padding: 0 52px;
+    border-radius: 10px;
+    box-sizing: border-box !important;
+    border: 2px solid #ddd !important;
+    background-color: #fff !important;
+    font-size: 16px;
+    transition: 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4) !important;
+     
+} */
+
+/* focus UX */
+/* .form-control:focus {
+    outline: none;
+    border-color: #1e7e34;
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.1),
+        0 0 0 4px rgba(30,126,52,0.15);
+} */
+
+
+
+.form-control {
+    width: 100%;
+    height: 56px;
+    padding: 0 52px;
+    border-radius: 10px;
+    border: 2px solid #ddd !important;
+    background-color: #fff !important;
+    -webkit-text-fill-color: #000 !important;
+    font-size: 16px;
+    transition: 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4) !important;
+    box-sizing: border-box !important;
+}
+
+.form-control::placeholder {
+    color: #94a3b8 !important;
+    -webkit-text-fill-color: #94a3b8 !important;
+    opacity: 1;
+}
+
+.form-control:focus {
+    outline: none !important;
+    border-color: #1e7e34 !important;
+    color: #000 !important;
+}
+
+.form-control:focus::placeholder {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* left icons */
+.prefix-icon {
+    position: absolute;
+    left: 18px;
+    font-size: 18px;
+    color: #94a3b8;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+/* eye icon */
+#togglePassword {
+    position: absolute;
+    right: 18px;
+    font-size: 20px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* focus icon change */
+.input-wrapper:focus-within .prefix-icon,
+.input-wrapper:focus-within #togglePassword {
+    color: #1e7e34;
+}
+
+.btn-login {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    background: linear-gradient(#1e7e34 0%, #19692c 65%, #145523 100%), #145523 !important;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    padding: 16px;
+}
+
+.btn-login:hover {
+    background: linear-gradient(#218838 0%, #1e7e34 65%, #19692c 100%), #19692c !important;
+    transform: translateY(-2px);
+}
+
+.btn-login:active {
+    transform: scale(0.98);
+}
+
+
+#login-footer {
+    padding-top: 25px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.voice,
+#layout > div > .footer,
+.footer-links,
+.decoration {
+    display: none !important;
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 40px 25px !important;
+    }
+    .btn-login,
+    .form-control {
+        height: 60px;
+    }
+    .login-header img {
+        max-width: 150px;
+        margin-bottom: 12px;
+    }
+}
+
+#message.error-message {
+    display: none; 
+    background: #fff5f5 !important;
+    color: #c00 !important;
+    padding: 12px 15px !important;
+    border-radius: 8px !important;
+    margin-bottom: 20px !important;
+    font-size: 14px !important;
+    text-align: left !important;
+    border-left: 5px solid #c00 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+}
+
+#message.error-message:not(:empty) {
+    display: block !important;
+}
+
+</style>
+
+<div id="layout-content" role="main">
+    <div class="login-box">
+
+        <div class="login-header">
+            <img src="skins/elastic/images/shadhinHostingLogo.png" alt="Shadhin Hosting">
+            <p class="login-subtitle">Welcome to</p>
+            <h1 class="login-title">Shadhin Mail</h1>
+        </div>
+
+        <form method="post" action="./">
+            <input type="hidden" name="_task" value="login">
+            <input type="hidden" name="_action" value="login">
+            <input type="hidden" name="_timezone" value="Asia/Dhaka">
+            <input type="hidden" name="_url" id="rcmloginurl" value="">
+
+             <div id="message" class="error-message"></div>
+            <roundcube:object name="message" id="rcm-message-container" style="display:none" />
+
+            <!-- Email -->
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-envelope prefix-icon"></i>
+                    <input type="text" name="_user" class="form-control"
+                           placeholder="username@domain.com" required>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock prefix-icon"></i>
+                    <input type="password" name="_pass" id="rcmloginpwd"
+                           class="form-control" placeholder="••••••••" required>
+                    <i class="fa-solid fa-eye" id="togglePassword"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">
+                Login to Shadhin Mail <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </button>
+
+            <div id="login-footer">
+                © <span id="currentYear"></span> <strong>Shadhin Hosting</strong>
+            </div>
+
+        </form>
     </div>
-
-    <form id="custom-login-form" name="login-form" method="post" action="./">
-        <input type="hidden" name="_task" value="login">
-        <input type="hidden" name="_action" value="login">
-        <input type="hidden" name="_timezone" id="rcmlogintz" value="Asia/Dhaka">
-        <input type="hidden" name="_url" id="rcmloginurl" value="">
-        
-        <roundcube:container name="loginform" id="login-form" />
-
-        <div class="input-group">
-            <label for="rcmloginuser">Username</label>
-            <input name="_user" id="rcmloginuser" type="text" placeholder="username@domainName" required autocomplete="off">
-        </div>
-
-        <div class="input-group">
-            <label for="rcmloginpwd">Password</label>
-            <input name="_pass" id="rcmloginpwd" type="password" placeholder="Your Password" required autocomplete="off">
-        </div>
-
-        <div class="form-buttons">
-            <button type="submit" class="btn-login">Login to Shadhin Mail</button>
-        </div>
-
-        <div id="login-footer">
-             <p>&copy; 2026 <strong>Shadhin Mail</strong></p>
-        </div>
-    </form>
 </div>
 
 <noscript>
     <p class="noscriptwarning"><roundcube:label name="noscriptwarning" /></p>
 </noscript>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("togglePassword");
+    const pass = document.getElementById("rcmloginpwd");
+    const customMsgBox = document.getElementById("message");
+
+    toggle.addEventListener("click", () => {
+        const isPass = pass.type === "password";
+        pass.type = isPass ? "text" : "password";
+        toggle.classList.toggle("fa-eye");
+        toggle.classList.toggle("fa-eye-slash");
+    });
+
+    const yearEl = document.getElementById("currentYear");
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
+
+    function showTimedMessage(text) {
+        if (customMsgBox) {
+            customMsgBox.textContent = text;
+            customMsgBox.style.display = "block";
+            customMsgBox.style.opacity = "1";
+
+            setTimeout(() => {
+                customMsgBox.style.transition = "opacity 0.5s ease";
+                customMsgBox.style.opacity = "0";
+                setTimeout(() => {
+                    customMsgBox.style.display = "none";
+                    customMsgBox.textContent = ""; 
+                }, 500);
+            }, 3000);
+        }
+    }
+
+    if (window.rcmail) {
+        rcmail.addEventListener('message', function(props) {
+            if (props.type === 'error' || props.type === 'warning') {
+                showTimedMessage(props.message);
+                
+                setTimeout(() => {
+                    const originalMsg = document.querySelector('.ui.pnotify');
+                    if (originalMsg) originalMsg.style.display = 'none';
+                }, 50);
+            }
+        });
+    }
+
+});
+</script>
 
 <roundcube:include file="includes/footer.html" />
